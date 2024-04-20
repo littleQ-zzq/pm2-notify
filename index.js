@@ -8,6 +8,7 @@ const toChatIds = config.telegram.toChatIds
 
 async function start() {
     try {
+        console.log(`PM2 Event Listening ... `)
         pm2.launchBus((err, bus) => {
             if (err) {
                 console.error('Error connecting to PM2 bus:', err);
@@ -17,7 +18,7 @@ async function start() {
                 const event = data.event
                 const processName = data.process.name
                 const status = data.process.status
-                console.log(`New ${event} Event for process ${processName}, status: ${status}`)
+                console.log(`【${tgUtil.proxy}】New ${event} Event for process ${processName}, status: ${status}`)
                 const msg = `
 <b>⚠️ New PM2 process Event</b>
 
@@ -28,7 +29,7 @@ async function start() {
                 for (const tgChatId of toChatIds) {
                     tgUtil.bot.telegram.sendMessage(tgChatId, msg, {
                         parse_mode: "HTML",
-                        
+
                     })
                 }
             });

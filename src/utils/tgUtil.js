@@ -6,7 +6,7 @@ const { HttpsProxyAgent } = require('https-proxy-agent');
 const getProxyPool = require('./proxyUtil');
 
 const botToken = config.telegram.bot.token
-const agent = config.telegram.bot.agent
+const agent = config.telegram.agent
 
 class TgUtil {
     constructor() {
@@ -24,6 +24,7 @@ class TgUtil {
         const proxyPool = await getProxyPool()
         const proxy = proxyPool.length === 0 ? '' : Array.from(proxyPool)[(Math.random() * proxyPool.length) | 0]
         this.agent = new HttpsProxyAgent(proxy)
+        this.proxy = proxy
     }
 }
 
