@@ -1,3 +1,4 @@
+require('./src/utils/logFormatUtil')
 const pm2 = require('pm2');
 const TgUtil = require('./src/utils/tgUtil')
 const tgUtil = new TgUtil()
